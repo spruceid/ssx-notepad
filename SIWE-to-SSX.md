@@ -68,13 +68,13 @@ The migration from SIWE to SSX is fairly straightforward. The changes can be see
      SSXServer,
      SSXExpressMiddleware,
      SSXInfuraProviderNetworks, // optional enum import
-     SSXRPCProviders,           // optional enum import
+     SSXRPCProviders, // optional enum import
    } from "@spruceid/ssx-server";
 
    const ssx = new SSXServer({
      signingKey: process.env.SSX_SIGNING_KEY,
      providers: {
-        // an RPC provider is optional here, as we are not resolving ens server side. But this is supported
+       // an RPC provider is optional here, as we are not resolving ens server side. But this is supported
        rpc: {
          service: SSXRPCProviders.SSXInfuraProvider,
          network: SSXInfuraProviderNetworks.MAINNET,
@@ -93,7 +93,6 @@ The migration from SIWE to SSX is fairly straightforward. The changes can be see
 
    // const app = Express();
    app.use(SSXExpressMiddleware(ssx));
-
    ```
 
 2. Once SSX is live on the server, you can add it to frontend by adding
@@ -112,36 +111,41 @@ the `providers.server.host` field. Once this is done, you should be able to sign
     ```
 
 3. Now that ssx is installed, you can use it to protect express routes instead of `req.session.siwe`
-    ```diff
+   ```diff
    app.put('/api/save', async (req, res) => {
    -   if (!req.session.siwe) {
    +   if (!req.ssx.verified) {
-           res.status(401).json({ message: 'You have to first sign_in' });
-           return;
-       }
+          res.status(401).json({ message: 'You have to first sign_in' });
+          return;
+      }
    ```
 
 ### Cleanup and Testing
+
 Once you've done the above steps, SSX is now installed for your dapp! After this you do the following
+
 1. Remove logic from the frontend that use the old authentication. Verify that the session cookie is sent with your requests to the server. Test the dapp!
 2. Remove or deprecate old endpoints and logic using the previous SIWE method on your backend
 3. Remove the siwe dependency
 
 ## Other SSX Features
+
 SSX has a few great features like signing in on behalf of a Safe, resolving ENS on login, or accessing metrics. To learn more about enabling these features, check out the [SSX Docs](https://docs.ssx.id/configuring-ssx);
 
 ### ENS Resolution
+
 Adding the flag for ENS resolution will provide an ENS domain and name if one is set for the account
-   ```diff
-    ssx = new SSX({
-   + resolveEns: true
-     providers: {
-       web3: { driver: provider },
-     },
-     siweConfig: {
-       domain: "localhost:4361",
-       statement: "SIWE Notepad Example",
-     },
-   });
-   let { address, ens } = await ssx.signIn();
-   ```
+
+```diff
+ssx = new SSX({
++ resolveEns: true
+  providers: {
+    web3: { driver: provider },
+  },
+  siweConfig: {
+    domain: "localhost:4361",
+    statement: "SIWE Notepad Example",
+  },
+});
+let { address, ens } = await ssx.signIn();
+```
