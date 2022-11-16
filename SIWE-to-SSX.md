@@ -9,7 +9,7 @@ This tutorial demonstrates how to add SSX to an application that is already usin
 
 ## Migration
 ### Overview
-The migration from SIWE to SSX is fairly straightforward. The main changes can be seen in [`ssx-notepad`](https://github.com/spruceid/ssx-notepad) which was forked from the [`siwe-notepad`](https://github.com/spruceid/siwe-notepad) example. `ssx-notepad` is a simple example dapp with a simple express backend that stores a note for an authenticated ethereum user. The main changes are:
+The migration from SIWE to SSX is fairly straightforward. The changes can be seen in [`ssx-notepad`](https://github.com/spruceid/ssx-notepad) which was forked from the [`siwe-notepad`](https://github.com/spruceid/siwe-notepad) example. `ssx-notepad` is a simple example dapp with a simple express backend that stores a note for an authenticated ethereum user. The [main changes](https://github.com/spruceid/siwe-notepad/compare/main...spruceid:ssx-notepad:main) are:
 - Add the `ssx` library to your frontend ([4575af9](https://github.com/spruceid/ssx-notepad/pull/1/commits/4575af935b43eb4c4edeb2bd715ed1d817e423a6))
 - Replace the wallet connection and signing logic with the `ssx` library ([391a90f](https://github.com/spruceid/ssx-notepad/pull/1/commits/391a90f1036bb214e16aa9070207ab673d400065))
 - Add the `ssx-server` library to your backend ([d484d0e](https://github.com/spruceid/ssx-notepad/pull/2/commits/d484d0ee483368eb611a2b84973b8d6ec520b37c))
