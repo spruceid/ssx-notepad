@@ -8,11 +8,15 @@ This is where SSX comes in! SSX is a library that makes it easy to add sign-in t
 
 This tutorial demonstrates how to add SSX to an application that is already using the SIWE library and some of the benefits of doing so!
 
+### Modifications
+`ssx-notepad` is a simple example dapp with a simple express backend that stores a note for an authenticated Ethereum user. We will be modifying this application to use SSX instead of SIWE by modifying:
+- `src/providers.ts` - this file holds the frontend code include the wallet connection logic
+- `src/index.ts` - the file that handles the backend logic including the endpoints for signing in and storing the note
 ## Migration
 
 ### Overview
 
-The migration from SIWE to SSX is fairly straightforward. The changes can be seen in [`ssx-notepad`](https://github.com/spruceid/ssx-notepad) which was forked from the [`siwe-notepad`](https://github.com/spruceid/siwe-notepad) example. `ssx-notepad` is a simple example dapp with a simple express backend that stores a note for an authenticated Ethereum user. The [main changes](https://github.com/spruceid/siwe-notepad/compare/main...spruceid:ssx-notepad:main) are:
+The migration from SIWE to SSX is fairly straightforward. The changes can be seen in [`ssx-notepad`](https://github.com/spruceid/ssx-notepad) which was forked from the [`siwe-notepad`](https://github.com/spruceid/siwe-notepad) example. The [main changes](https://github.com/spruceid/siwe-notepad/compare/main...spruceid:ssx-notepad:main) are:
 
 - Add the `ssx` library to your frontend ([4575af9](https://github.com/spruceid/ssx-notepad/pull/1/commits/4575af935b43eb4c4edeb2bd715ed1d817e423a6))
 - Replace the wallet connection and signing logic with the `ssx` library ([391a90f](https://github.com/spruceid/ssx-notepad/pull/1/commits/391a90f1036bb214e16aa9070207ab673d400065))
